@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Training artifacts
+runs/
+runs_SVL/
+checkpoints/
+predictions/
+*.pt
+*.pth
+*.ckpt
+events.out.tfevents.*
+
+# Local data and secrets
+data/
+.env
+.env.*
+!.env.example
+*.nii
+*.nii.gz
+*.h5
+*.hdf5
+
+# Editors
+.idea/
+.vscode/
