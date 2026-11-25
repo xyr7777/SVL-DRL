@@ -2,6 +2,7 @@ import warnings  #忽略警告
 import argparse
 import os
 from functools import partial
+from utils.reproducibility import set_global_seed
 import itertools
 
 import numpy as np
@@ -36,6 +37,8 @@ from typing import Callable, Dict, List, Tuple
 parser = argparse.ArgumentParser(description="Swin UNETR segmentation pipeline for BRATS Challenge")
 parser.add_argument("--data_name", default='MT_Pancreas', type=str, help="training for which dataset")
 # Pancreas, left_atrial, Brats21, SFDA_LA, SFDA_Pancreas, SFDA_Brats21,  MT_Pancreas, MT_LA
+parser.add_argument("--seed", default=42, type=int, help="base random seed")
+parser.add_argument("--deterministic", action="store_true", help="enable deterministic PyTorch operations (may reduce performance)")
 parser.add_argument("--checkpoint", default=None, help="start training from saved checkpoint")
 parser.add_argument("--logdir", default="MT_Pancreas_noise0.5", type=str, help="directory to save the tensorboard logs")
 parser.add_argument("--fold", default=1, type=int, help="data fold")
@@ -215,7 +218,7 @@ def main_worker(gpu, args):
             backend=args.dist_backend, init_method=args.dist_url, world_size=args.world_size, rank=args.rank
         )
     torch.cuda.set_device(args.gpu)
-    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.benchmark = not args.deterministic
     args.test_mode = False
     
     loader = get_loader(args)
