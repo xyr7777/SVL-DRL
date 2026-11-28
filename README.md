@@ -2,10 +2,6 @@
 
 Research code for staged voxel-level deep reinforcement learning for 3D medical image segmentation with noisy annotations.
 
-## Reproducibility status
-
-This is a research-code release, not a verified one-command reproduction package. The model modules and the test-data loader are included with the training and evaluation scripts. The exact package versions, dataset split manifests, noise-generation settings, checkpoints, and commands for all experiments have not yet been consolidated and verified. The published scripts contain machine-specific paths and historical defaults. A successful run and numerical agreement with the paper have not been independently verified for this release.
-
 ## Repository overview
 
 - `main_SVL.py`: staged training entry point.
